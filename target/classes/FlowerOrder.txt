@@ -1,3 +1,0 @@
-Lily 10 5
-SunFlower 10 7
-Rose 10 5
