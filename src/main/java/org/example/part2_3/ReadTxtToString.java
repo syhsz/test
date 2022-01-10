@@ -23,7 +23,9 @@ public class ReadTxtToString {
                 list.add(splitedStr);
             }
             bf.close();
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
+            System.out.println("Not found file" + filePath);
+        }catch (IOException e) {
             e.printStackTrace();
         }
         return list;

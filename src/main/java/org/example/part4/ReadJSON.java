@@ -2,6 +2,7 @@ package org.example.part4;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import org.example.part2_3.Flower;
 import org.example.part2_3.FlowerWithDiscount;
@@ -42,9 +43,8 @@ public class ReadJSON implements ReadFlowerBasket {
                 }
                 listFlowerBasket.add(flower);
             }
-        }catch (NullPointerException | IOException e) {
+        }catch (NullPointerException | IOException | JSONException e) {
             e.printStackTrace();
-            return null;
         }
         return listFlowerBasket;
     }

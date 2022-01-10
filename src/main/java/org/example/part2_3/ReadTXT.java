@@ -12,8 +12,8 @@ public class ReadTXT implements ReadFlowerBasket {
     }
 
     public ArrayList<Flower>  ReadFlowersList(){
+        ArrayList<Flower> flowerBasket = new ArrayList<>();
         try{
-            ArrayList<Flower> flowerBasket = new ArrayList<>();
             ArrayList<String[]> list = new ReadTxtToString(filePath).Read();
             for (String[] s: list) {
                 String name = s[0];
@@ -27,10 +27,9 @@ public class ReadTXT implements ReadFlowerBasket {
                 }
                 flowerBasket.add(flower);
             }
-            return flowerBasket;
         }catch (NumberFormatException | ArrayIndexOutOfBoundsException e){
             e.printStackTrace();
-            return null;
         }
+        return flowerBasket;
     }
 }

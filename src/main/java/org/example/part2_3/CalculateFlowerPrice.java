@@ -20,13 +20,16 @@ public class CalculateFlowerPrice {
             for (String[] s : stockList) {
                 String name = s[0];
                 int num = Integer.parseInt(s[1]);
+                if (num < 0) throw new InvalidValueException();
                 stockMap.put(name, num);
             }
 
             ReadFlowerBasket flowerOrder = new ReadTXT(basketFilePath);
             listFlowerBasket = flowerOrder.ReadFlowersList();
             for (Flower flower : listFlowerBasket) {
-                if (flower.num > stockMap.get(flower.name)) {
+                if (stockMap.get(flower.name) == null) {
+                    throw new NoSuchFlowerException(flower.name);
+                }else if (flower.num > stockMap.get(flower.name)) {
                     throw new OutOfStockException();
                 } else if ((flower.price < 0) | (flower.num < 0)) {
                     throw new InvalidValueException();
@@ -34,13 +37,10 @@ public class CalculateFlowerPrice {
                 totalPrice += flower.CalculatePrice();
             }
             System.out.printf("The total price of a bouquet of flowers: %d%n", totalPrice);
-        } catch (NumberFormatException | StringIndexOutOfBoundsException | InvalidValueException | OutOfStockException e) {
-            e.printStackTrace();
-        } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
-        } catch (NullPointerException e) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException | NullPointerException | InvalidValueException | OutOfStockException | NoSuchFlowerException e) {
             e.printStackTrace();
         }
+
 
 
        /* try {
